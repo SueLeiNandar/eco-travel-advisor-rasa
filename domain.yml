@@ -1,0 +1,162 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - plan_trip
+  - provide_origin
+  - provide_destination
+  - provide_dates
+  - provide_budget
+  - provide_sustainability_preference
+  - ask_carbon_impact
+  - ask_hotel_options
+  - ask_transport_options
+  - request_handover
+  - affirm
+  - deny
+  - out_of_scope
+
+entities:
+  - origin
+  - destination
+  - travel_date
+  - return_date
+  - budget
+  - transport_mode
+  - sustainability_level
+  - number_of_travellers
+
+slots:
+  origin:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: origin
+  destination:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: destination
+  travel_date:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: travel_date
+  return_date:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: return_date
+  budget:
+    type: categorical
+    values:
+      - low
+      - medium
+      - high
+      - flexible
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: budget
+  transport_mode:
+    type: categorical
+    values:
+      - train
+      - bus
+      - flight
+      - car
+      - walking
+      - bike
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: transport_mode
+  sustainability_level:
+    type: categorical
+    values:
+      - low carbon
+      - balanced
+      - budget friendly
+      - cultural support
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: sustainability_level
+  carbon_score:
+    type: float
+    influence_conversation: false
+    mappings:
+      - type: custom
+  hotel_options:
+    type: any
+    influence_conversation: false
+    mappings:
+      - type: custom
+  transport_options:
+    type: any
+    influence_conversation: false
+    mappings:
+      - type: custom
+  handover_required:
+    type: bool
+    influence_conversation: true
+    mappings:
+      - type: custom
+
+responses:
+  utter_greet:
+    - text: "Hello. I am Eco-Travel Advisor. I can help you plan a more sustainable trip."
+  utter_ask_origin:
+    - text: "Where are you travelling from?"
+  utter_ask_destination:
+    - text: "Which destination would you like to visit?"
+      buttons:
+        - title: "Amsterdam"
+          payload: '/provide_destination{"destination":"Amsterdam"}'
+        - title: "Copenhagen"
+          payload: '/provide_destination{"destination":"Copenhagen"}'
+        - title: "Barcelona"
+          payload: '/provide_destination{"destination":"Barcelona"}'
+  utter_ask_dates:
+    - text: "What are your travel dates? Example: 20 July to 24 July."
+  utter_ask_budget:
+    - text: "What is your budget level?"
+      buttons:
+        - title: "Low"
+          payload: '/provide_budget{"budget":"low"}'
+        - title: "Medium"
+          payload: '/provide_budget{"budget":"medium"}'
+        - title: "Flexible"
+          payload: '/provide_budget{"budget":"flexible"}'
+  utter_ask_sustainability_preference:
+    - text: "What matters most for this trip?"
+      buttons:
+        - title: "Lowest carbon"
+          payload: '/provide_sustainability_preference{"sustainability_level":"low carbon"}'
+        - title: "Balanced"
+          payload: '/provide_sustainability_preference{"sustainability_level":"balanced"}'
+        - title: "Budget friendly"
+          payload: '/provide_sustainability_preference{"sustainability_level":"budget friendly"}'
+        - title: "Support local culture"
+          payload: '/provide_sustainability_preference{"sustainability_level":"cultural support"}'
+  utter_goodbye:
+    - text: "Goodbye. I hope your trip is greener and easier to plan."
+  utter_out_of_scope:
+    - text: "I am mainly designed for sustainable travel planning. Please ask about destinations, transport, hotels, carbon impact, or handover."
+
+actions:
+  - action_collect_missing_slots
+  - action_calculate_carbon
+  - action_fetch_travel_options
+  - action_rank_eco_options
+  - action_handover_to_human
+  - action_two_stage_clarification
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
