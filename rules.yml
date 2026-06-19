@@ -1,0 +1,76 @@
+version: "3.1"
+
+rules:
+- rule: greet user
+  steps:
+    - intent: greet
+    - action: utter_greet
+
+- rule: goodbye user
+  steps:
+    - intent: goodbye
+    - action: utter_goodbye
+
+- rule: start trip planning
+  steps:
+    - intent: plan_trip
+    - action: action_collect_missing_slots
+
+- rule: continue after origin
+  steps:
+    - intent: provide_origin
+    - action: action_collect_missing_slots
+
+- rule: continue after destination
+  steps:
+    - intent: provide_destination
+    - action: action_collect_missing_slots
+
+- rule: continue after dates
+  steps:
+    - intent: provide_dates
+    - action: action_collect_missing_slots
+
+- rule: continue after budget
+  steps:
+    - intent: provide_budget
+    - action: action_collect_missing_slots
+
+- rule: continue after sustainability preference
+  steps:
+    - intent: provide_sustainability_preference
+    - action: action_fetch_travel_options
+    - action: action_calculate_carbon
+    - action: action_rank_eco_options
+
+- rule: transport options
+  steps:
+    - intent: ask_transport_options
+    - action: action_fetch_travel_options
+    - action: action_rank_eco_options
+
+- rule: hotel options
+  steps:
+    - intent: ask_hotel_options
+    - action: action_fetch_travel_options
+    - action: action_rank_eco_options
+
+- rule: carbon calculation
+  steps:
+    - intent: ask_carbon_impact
+    - action: action_calculate_carbon
+
+- rule: handover
+  steps:
+    - intent: request_handover
+    - action: action_handover_to_human
+
+- rule: out of scope
+  steps:
+    - intent: out_of_scope
+    - action: utter_out_of_scope
+
+- rule: fallback clarification
+  steps:
+    - intent: nlu_fallback
+    - action: action_two_stage_clarification
