@@ -1,0 +1,37 @@
+version: "3.1"
+
+stories:
+- story: complete eco trip planning
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: plan_trip
+    - action: action_collect_missing_slots
+    - intent: provide_origin
+    - action: action_collect_missing_slots
+    - intent: provide_destination
+    - action: action_collect_missing_slots
+    - intent: provide_dates
+    - action: action_collect_missing_slots
+    - intent: provide_budget
+    - action: action_collect_missing_slots
+    - intent: provide_sustainability_preference
+    - action: action_fetch_travel_options
+    - action: action_calculate_carbon
+    - action: action_rank_eco_options
+
+- story: user asks for carbon after destination
+  steps:
+    - intent: plan_trip
+    - action: action_collect_missing_slots
+    - intent: provide_origin
+    - action: action_collect_missing_slots
+    - intent: provide_destination
+    - action: action_collect_missing_slots
+    - intent: ask_carbon_impact
+    - action: action_calculate_carbon
+
+- story: human handover requested
+  steps:
+    - intent: request_handover
+    - action: action_handover_to_human
