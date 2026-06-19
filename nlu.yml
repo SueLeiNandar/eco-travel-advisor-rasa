@@ -1,0 +1,122 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hello
+    - hi
+    - good morning
+    - hey
+    - hello eco advisor
+
+- intent: goodbye
+  examples: |
+    - bye
+    - goodbye
+    - see you
+    - thanks bye
+
+- intent: plan_trip
+  examples: |
+    - I want to plan an eco friendly trip
+    - help me plan a sustainable holiday
+    - I need a green travel plan
+    - can you make an eco travel itinerary
+    - plan a carbon friendly trip for me
+    - I want a sustainable tourism plan
+
+- intent: provide_origin
+  examples: |
+    - I am travelling from [Berlin](origin)
+    - from [London](origin)
+    - my starting city is [Paris](origin)
+    - I will leave from [Munich](origin)
+    - start from [Rome](origin)
+
+- intent: provide_destination
+  examples: |
+    - I want to go to [Amsterdam](destination)
+    - destination is [Copenhagen](destination)
+    - I would like to visit [Barcelona](destination)
+    - to [Paris](destination)
+    - my destination is [Vienna](destination)
+
+- intent: provide_dates
+  examples: |
+    - from [20 July](travel_date) to [24 July](return_date)
+    - I travel on [15 August](travel_date)
+    - my trip starts [next Friday](travel_date)
+    - return on [30 September](return_date)
+    - [10 June](travel_date) until [14 June](return_date)
+
+- intent: provide_budget
+  examples: |
+    - my budget is [low](budget)
+    - [medium](budget) budget
+    - I have a [high](budget) budget
+    - budget is [flexible](budget)
+    - keep it [low](budget)
+
+- intent: provide_sustainability_preference
+  examples: |
+    - I want [low carbon](sustainability_level)
+    - choose [balanced](sustainability_level)
+    - I prefer [budget friendly](sustainability_level)
+    - I want to support [cultural support](sustainability_level)
+    - lowest carbon is important
+    - balance price and environment
+
+- intent: ask_carbon_impact
+  examples: |
+    - what is the carbon impact
+    - calculate emissions
+    - how much CO2 does this trip create
+    - compare carbon footprint
+    - is train lower emission than flight
+
+- intent: ask_hotel_options
+  examples: |
+    - show eco hotels
+    - recommend sustainable accommodation
+    - find green hotels
+    - any eco certified hotel
+    - where should I stay sustainably
+
+- intent: ask_transport_options
+  examples: |
+    - show green transport options
+    - compare train bus and flight
+    - what transport is sustainable
+    - recommend low carbon travel mode
+    - should I take train or flight
+
+- intent: request_handover
+  examples: |
+    - connect me to a human advisor
+    - I want human support
+    - please handover to a travel specialist
+    - this is complicated
+    - advisor please
+
+- intent: affirm
+  examples: |
+    - yes
+    - correct
+    - sure
+    - okay
+    - that is fine
+
+- intent: deny
+  examples: |
+    - no
+    - not really
+    - cancel
+    - I do not want that
+    - wrong
+
+- intent: out_of_scope
+  examples: |
+    - tell me a joke
+    - write my homework
+    - what is the stock price
+    - play music
